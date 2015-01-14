@@ -7,12 +7,14 @@
 	String rType2 = "rtype2";
 	String splitter = ":||:";
 	MiniMaxGame game = null;
-	String statusResponse = "", gameTableResponse="";
+	String statusResponse = "", gameTableResponse="", statusCode="";
 	if (qtype == 1) {
 		game = new MiniMaxGame();
-		System.out.println("going to serialize");
+		//System.out.println("going to serialize");
+		session.invalidate();
+		session = request.getSession();
 		session.setAttribute("gameobject", game);
-		System.out.println("serialized");
+		//System.out.println("serialized");
 		int first = Integer.parseInt(request.getParameter("first"));
 		game.startGame(first);
 		if(first==0){
@@ -24,9 +26,10 @@
 		switch(status){
 			case 0: statusResponse = "You lost."; break;
 			case 1: statusResponse = "You won... I am not unbeatable apparently"; break;
-			case 2: statusResponse = "It's a draw. You know your shit."; break;
+			case 2: statusResponse = "It's a draw. You know your s**t."; break;
 			case 3: statusResponse = "Your turn ..."; break;
 		}
+		statusCode = status+"";
 	} else if (qtype == 2) {
 		game = (MiniMaxGame) session.getAttribute("gameobject");
 		String ij =  request.getParameter("ij");
@@ -39,12 +42,15 @@
 		switch(status){
 			case 0: statusResponse = "You lost."; break;
 			case 1: statusResponse = "You won... I am not unbeatable apparently"; break;
-			case 2: statusResponse = "It's a draw. You know your shit."; break;
+			case 2: statusResponse = "It's a draw. You know your s**t."; break;
 			case 3: statusResponse = "Your turn ..."; break;
 		}
+		if(status!=3) session.invalidate();
 		Pair lastMove = game.latestPair;
 		gameTableResponse = ""+(lastMove.i+1)+""+(lastMove.j+1)+"";
+		statusCode = status+"";
 	}
 %>
 <div id="status"><%= statusResponse %></div>
 <div id="gametable"><%=gameTableResponse %></div>
+<div id="statuscode"><%= statusCode %></div>

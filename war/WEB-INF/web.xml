@@ -5,20 +5,9 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.ttt.mm.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/tictactoe/greet</url-pattern>
-  </servlet-mapping>
-  
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>TicTacToe.jsp</welcome-file>
+    <welcome-file>TicTacToe.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

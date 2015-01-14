@@ -1,0 +1,2 @@
+serviceClass: com.ttt.mm.client.GreetingService
+path: 3C4E65836F31CB7CA64A856359A65B73.gwt.rpc

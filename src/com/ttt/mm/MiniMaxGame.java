@@ -24,16 +24,15 @@ public class MiniMaxGame implements Serializable {
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 3; j++)
 				availablePairs.add(new Pair(i, j));
-		if (first == 0)
-			computerMove();
+		if (first == 0){
+			Pair firstPair = new Pair(0, 0); 
+			playMove(firstPair, computer);
+			latestPair = firstPair;
+		}
 	}
 
 	public void computerMove() {
-		Move bestMove;
-		if (availablePairs.size() == 9)
-			bestMove = new Move(new Pair(0, 0), 0);
-		else
-			bestMove = getBestMove(0);
+		Move bestMove = getBestMove(0);
 		playMove(bestMove.position, computer);
 		latestPair = bestMove.position;
 	}
@@ -83,8 +82,6 @@ public class MiniMaxGame implements Serializable {
 		for (Pair pairForNextMove : pairs) {
 			// System.out.println("----checking for pair "+pairForNextMove);
 			playMove(pairForNextMove, player);
-			// System.out.println("new grid is");
-			// showGrid();
 			score = getScore(depth);
 			// System.out.println("--score recd is : "+score);
 			if (score == 0) {
@@ -101,8 +98,6 @@ public class MiniMaxGame implements Serializable {
 			}
 			undoMove(pairForNextMove);
 			// System.out.println("--move undone: ");
-			// System.out.println("grid back to");
-			// showGrid();
 		}
 		if (player == computer) {
 			Move m = new Move(maxPair, maxScore);
@@ -155,16 +150,6 @@ public class MiniMaxGame implements Serializable {
 		if (grid[0][2] == human && grid[1][1] == human && grid[2][0] == human)
 			return true;
 		return false;
-	}
-
-	public static void main(String[] args) throws IOException {
-		MiniMaxGame game = new MiniMaxGame();
-		int first = 0;
-		// System.out.println("Do you wanna go first ?y/n");
-		// String reply = game.br.readLine();
-		// if("yes".equals(reply)) first = 1;
-		game.startGame(first);
-
 	}
 
 }

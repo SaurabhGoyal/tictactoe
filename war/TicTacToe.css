@@ -1,9 +1,13 @@
+@font-face {
+    font-family: 'fjordone';
+    src: url('fjord.otf');
+}
 #mainbody {
-	margin: 50px 100px;
+	margin: 40px 100px;
 }
 #top{
 	font-weight: bold;
-	font-family: 'Fjord One';
+	font-family: fjordone;
 }
 #status,#info {
 	font-size: x-large;

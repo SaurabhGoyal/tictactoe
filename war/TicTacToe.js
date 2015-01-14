@@ -14,6 +14,7 @@ $(function() {
 		$(this).secondQuery($ij);
 	});
 	$.fn.firstQuery = function(firstmove) {
+		$("#status").text("Loading the game...");
 		$("#gametable *").prop("disabled",false);
 		$.get(url, {
 			qtype:'1',
